@@ -3,6 +3,9 @@ package br.com.fiap.pacman;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,7 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class Game extends JFrame implements KeyListener {
-
+	
+	Scanner sr = new Scanner(System.in);
+	private int teclado;
+	
 	private static final long serialVersionUID = 1L;
 	private Player player = new Player(50, 50, 180);
 	private Ghost ghost1 = new Ghost(0,0,0);
@@ -88,18 +94,59 @@ public class Game extends JFrame implements KeyListener {
 	private void run() {
 		while (player.getLife() > 0) {
 			
-			player.mover(0);
+			
+			teclado = sr.nextInt();
+			
+			player.mover(teclado);
 			ghost1.mover();
 			ghost2.mover();
 			ghost3.mover();
 			ghost4.mover();
 			render();
 			
+			//Colisao
+			
+			//Lista com todos os fantasmas em jogo 
+			List<Ghost> listGhost = Arrays.asList(ghost1,ghost2,ghost3,ghost4);
+			
+			//Colisao do fantasma com o player
+			for(int i = 0; i < listGhost.size();i++) {
+				//Se o player estiver na mesma posicao de um fantasma, o player pedera uma vida 
+				if((player.getX() == listGhost.get(i).getX()) && (player.getY() == listGhost.get(i).getY())) {
+					listGhost.get(i).removerVida(player);
+				}
+			}
+			
+			
+			//Lista com  todas as Bombas em jogo
+			List<Bomb> listBomb = Arrays.asList(bomb);
+			
+			//Colisao com as Bombas
+			for(int i = 0; i < listBomb.size();i++) {
+				//Se o player estiver na mesma posicao de um fantasma, o player pedera uma vida 
+				if((player.getX() == listBomb.get(i).getX()) && (player.getY() == listBomb.get(i).getY())) {
+					listBomb.get(i).setVisivel(false);
+					listBomb.get(i).removerVida(player);
+				}
+			}
+			
+			//Lista com todos os boosters em jogo
+			List<Booster> listBooster = Arrays.asList(booster);
+			
+			//Colisao com os Boosters
+			for(int i = 0; i < listBooster.size();i++) {
+				//Se o player estiver na mesma posicao de um fantasma, o player pedera uma vida 
+				if((player.getX() == listBooster.get(i).getX()) && (player.getY() == listBooster.get(i).getY())) {
+					listBooster.get(i).setVisivel(false);
+					listBooster.get(i).deixarInvencivel(player);;
+				}
+			}
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
 			render();
 			
 		}

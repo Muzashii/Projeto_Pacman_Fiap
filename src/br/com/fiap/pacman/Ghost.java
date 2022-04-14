@@ -29,6 +29,11 @@ public class Ghost extends GameObject {
 		this.direction = direction;
 	}
 	
+	public void removerVida(Player player) {
+		player.setLife(player.getLife() - 1);
+	}
+
+	
 	private int direcaoAleatoria() {
 		Collections.shuffle(direcoes);
 		return direcoes.get(0);

@@ -112,10 +112,6 @@ public class Player extends GameObject {
 				setDirection(direcao);
 			}
 			
-			//acertouBomba(List<Bomb> bombs);//implementar depois
-			//acertouInimigo(List<Ghost>)
-			//acertouBuster
-			//acertouItem
 		}else {
 			System.out.println("Não pode se mover para esta localizacao");
 		}
