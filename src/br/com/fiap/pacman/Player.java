@@ -89,21 +89,27 @@ public class Player extends GameObject {
 		}
 	}
 	
-	public void mover(int direcao) {
+	public void mover() {
+		int direcao = this.getDirection();
 		if(podeMover(this.getX(), this.getY(), direcao)) {
 			if(direcao == 0) {
 				super.setX(this.getX());
-				super.setY(this.getY() + 10);
+				super.setY(this.getY()+10);
+				System.out.println("pacman indo pra CIMA"+ getY());
+
 				setDirection(direcao);
 			}
 			if(direcao == 90) {
 				super.setX(this.getX()+10);
 				super.setY(this.getY());
+				System.out.println("pacman indo pra DIREITA"+ getX());
 				setDirection(direcao);
 			}
 			if(direcao == 180) {
 				super.setX(this.getX());
-				super.setY(this.getY()-10);
+				super.setY(this.getY()+10);
+				System.out.println("pacman indo pra BAIXO"+ getY());
+
 				setDirection(direcao);
 			}
 			if(direcao == 270) {

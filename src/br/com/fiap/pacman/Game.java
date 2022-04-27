@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,9 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class Game extends JFrame implements KeyListener {
-	
-	Scanner sr = new Scanner(System.in);
-	private int teclado;
 	
 	private static final long serialVersionUID = 1L;
 	private Player player = new Player(50, 50, 180);
@@ -95,9 +91,8 @@ public class Game extends JFrame implements KeyListener {
 		while (player.getLife() > 0) {
 			
 			
-			teclado = sr.nextInt();
 			
-			player.mover(teclado);
+			player.mover();
 			ghost1.mover();
 			ghost2.mover();
 			ghost3.mover();
