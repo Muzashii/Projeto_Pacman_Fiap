@@ -25,7 +25,7 @@ public class Player extends GameObject {
 	}
 
 	public void setDirection(int direction) {
-		if(direction > 0) {
+		if(direction >= 0) {
 			this.direction = direction;
 		}
 	}
@@ -53,36 +53,42 @@ public class Player extends GameObject {
 	
 	
 	//Metodo que testa se a nova posicao do player e valida ou nao 
-	public boolean podeMover(int x,int y, int direcao) {
-		switch(direcao) {
+	public boolean podeMover() {
+		switch(this.getDirection()) {
+		
 		case(0):
-			if(y + 10 <= getScreenSize()) {
+			System.out.println("cima");
+			if(this.getY() - 10 >= 0) {
 				return true;
 			}else {
 				System.out.println("Posicao fora da tela");
 				return false;
 			}
+		
 		case(90):
-			if(x + 10 <= getScreenSize()) {
+			if(this.getX() + 10 <= getScreenSize()) {
 				return true;
 			}else {
 				System.out.println("Posicao fora da tela");
 				return false;
 			}
+		
 		case(180):
-			if(y - 10 <= getScreenSize() && y - 10 >= 0) {
+			if(this.getY() + 10 <= getScreenSize()) {
 				return true;
 			}else {
 				System.out.println("Posicao fora da tela");
 				return false;
 			}
+		
 		case(270):
-			if(x - 10 <= getScreenSize() && x - 10 >= 0) {
+			if(this.getX() - 10 >= 0) {
 				return true;
 			}else {
 				System.out.println("Posicao fora da tela");
 				return false;
 			}
+		
 		default:
 			System.out.println("direção indisponivel");
 			return false;
@@ -90,32 +96,25 @@ public class Player extends GameObject {
 	}
 	
 	public void mover() {
-		int direcao = this.getDirection();
-		if(podeMover(this.getX(), this.getY(), direcao)) {
-			if(direcao == 0) {
+		if(podeMover()) {
+			if(this.getDirection() == 0) {
 				super.setX(this.getX());
-				super.setY(this.getY()+10);
+				super.setY(this.getY()-10);
 				System.out.println("pacman indo pra CIMA"+ getY());
-
-				setDirection(direcao);
 			}
-			if(direcao == 90) {
+			if(this.getDirection() == 90) {
 				super.setX(this.getX()+10);
 				super.setY(this.getY());
 				System.out.println("pacman indo pra DIREITA"+ getX());
-				setDirection(direcao);
 			}
-			if(direcao == 180) {
+			if(this.getDirection() == 180) {
 				super.setX(this.getX());
 				super.setY(this.getY()+10);
 				System.out.println("pacman indo pra BAIXO"+ getY());
-
-				setDirection(direcao);
 			}
-			if(direcao == 270) {
+			if(this.getDirection() == 270) {
 				super.setX(this.getX()-10);
 				super.setY(this.getY());
-				setDirection(direcao);
 			}
 			
 		}else {

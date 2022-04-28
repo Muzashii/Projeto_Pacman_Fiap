@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 public class Game extends JFrame implements KeyListener {
 	
 	private static final long serialVersionUID = 1L;
-	private Player player = new Player(50, 50, 180);
+	private Player player = new Player(50, 50, 0);
 	private Ghost ghost1 = new Ghost(0,0,0);
 	private Ghost ghost2 = new Ghost(500,0,0);
 	private Ghost ghost3 = new Ghost(0,500,0);
@@ -119,7 +119,7 @@ public class Game extends JFrame implements KeyListener {
 			//Colisao com as Bombas
 			for(int i = 0; i < listBomb.size();i++) {
 				//Se o player estiver na mesma posicao de um fantasma, o player pedera uma vida 
-				if((player.getX() == listBomb.get(i).getX()) && (player.getY() == listBomb.get(i).getY())) {
+				if((player.getX() == listBomb.get(i).getX()) && (player.getY() == listBomb.get(i).getY()) ) {
 					listBomb.get(i).setVisivel(false);
 					listBomb.get(i).removerVida(player);
 				}
